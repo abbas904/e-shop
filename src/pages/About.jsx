@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import aboutImage from "../assets/Images-main/Images/about-banner.png";
-import missionImage from "../assets/Images-main/images/about-mission.png";
+import missionImage from "../assets/Images-main/Images/about-mission.png";
 import { FaShippingFast, FaHeadset, FaStar } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 
