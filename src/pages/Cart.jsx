@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import EmptyCart from '../assets/Images-main/emptycart.png'
+import EmptyCart from '../assets/Images-main/emptycart.png';
 import { FaTrashAlt } from 'react-icons/fa'
 import Modal from '../components/Modal'
 import ChangeAdddress from '../components/ChangeAdddress'
