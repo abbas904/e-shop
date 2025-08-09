@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react'
+import React, { useEffect, useMemo, lazy, Suspense } from 'react'
 import { Categories, mockData } from '../assets/MockData'
 import HeroImage from '../assets/Images-main/shop.png'
 import InfoSection from '../components/InfoSection'
@@ -7,43 +7,44 @@ import { setProducts } from '../redux/ProductSlice'
 import { useSelector, useDispatch } from 'react-redux'
 import ProductCard from '../components/ProductCard'
 import Slider from "react-slick";
-import { lazy, Suspense } from 'react'
 import { motion } from 'framer-motion'
+
 const LazyShop = lazy(() => import('./Shop'))
 
 const Home = () => {
   const dispatch = useDispatch()
   const products = useSelector(state => state.product)
   const topProducts = useMemo(() => products.products.slice(0, 5), [products.products])
+
   useEffect(() => {
      dispatch(setProducts(mockData))
   }, [dispatch])
 
   // إعدادات السلايدر
- const settings = {
-  dots: true,
-  infinite: true,
-  speed: 500,
-  slidesToShow: 4,
-  slidesToScroll: 1,
-  arrows: true,         // عرض الأسهم
-  autoplay: true,       // تفعيل التشغيل التلقائي
-  autoplaySpeed: 2500,  // سرعة التبديل
-  responsive: [
-    {
-      breakpoint: 1024,
-      settings: { slidesToShow: 3 }
-    },
-    {
-      breakpoint: 768,
-      settings: { slidesToShow: 2 }
-    },
-    {
-      breakpoint: 480,
-      settings: { slidesToShow: 1 }
-    }
-  ]
-};
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    arrows: true,
+    autoplay: true,
+    autoplaySpeed: 2500,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: { slidesToShow: 3 }
+      },
+      {
+        breakpoint: 768,
+        settings: { slidesToShow: 2 }
+      },
+      {
+        breakpoint: 480,
+        settings: { slidesToShow: 1 }
+      }
+    ]
+  };
 
   // Framer Motion variants
   const containerFade = {
@@ -79,7 +80,6 @@ const Home = () => {
     show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } }
   }
 
-
   return (
     <motion.div
       className="bg-white mt-2 px-4 md:px-16 lg:px-24"
@@ -111,7 +111,7 @@ const Home = () => {
             src={HeroImage}
             loading="eager"
             decoding="sync"
-            className='w-full h-full'
+            className='w-full h-full object-cover'
             alt="Hero"
             variants={heroImageVariants}
           />
@@ -129,27 +129,30 @@ const Home = () => {
           </motion.div>
         </motion.div>
       </div>
+
       <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={sectionUp}>
         <InfoSection/>
       </motion.div>
+
       <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={sectionUp}>
         <CategorySection/>
       </motion.div>
 
       {/* قسم Top Products مع Carousel */}
-      <motion.div className='container mx-auto py-12' initial="hidden" whileInView="show" viewport={{ once: true }} variants={sectionUp}>
+      <motion.div className='max-w-full mx-auto py-12 px-4 sm:px-6 lg:px-8' initial="hidden" whileInView="show" viewport={{ once: true }} variants={sectionUp}>
         <motion.h2 className='text-2xl font-bold mb-6 text-center'>Top Products</motion.h2>
         <Slider {...settings}>
           {topProducts.map((product) => (
-            <motion.div key={product.id} className="px-2" initial={{ opacity: 0, y: 14 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.35, ease: 'easeOut' }}>
+            <motion.div key={product.id} className="w-full px-2" initial={{ opacity: 0, y: 14 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.35, ease: 'easeOut' }}>
               <ProductCard product={product} />
             </motion.div>
           ))}
         </Slider>
       </motion.div>
-        <Suspense fallback={null}>
-          <LazyShop/>
-        </Suspense>
+
+      <Suspense fallback={null}>
+        <LazyShop/>
+      </Suspense>
     </motion.div>
   )
 }

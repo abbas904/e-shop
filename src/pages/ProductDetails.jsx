@@ -28,7 +28,7 @@ const ProductDetails = () => {
 
   return (
     <div className="bg-gray-50 min-h-screen py-10">
-      <div className="container mx-auto px-4 md:px-16 lg:px-24">
+      <div className="container max-w-xl mx-auto px-4 md:px-6 lg:px-8">
         {/* Product Section */}
         <div className="flex flex-col md:flex-row gap-10 bg-white rounded-xl shadow-lg p-6 md:p-10">
           {/* Product Image */}
