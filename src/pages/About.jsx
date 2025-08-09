@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import aboutImage from "../assets/Images-main/images/about-banner.png";
+import aboutImage from "../assets/Images-main/Images/about-banner.png";
 import missionImage from "../assets/Images-main/images/about-mission.png";
 import { FaShippingFast, FaHeadset, FaStar } from "react-icons/fa";
 import { Link } from 'react-router-dom';
@@ -129,17 +129,20 @@ const About = () => {
         >
           Shop now and enjoy a unique experience.
         </motion.p>
-        <motion.a
-          href="/contact"
-          className="bg-pink-600 text-white px-6 py-3 rounded-lg shadow hover:bg-pink-700 transition inline-block"
-          variants={fadeInUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          transition={{ delay: 0.2 }}
-        >
-          Contact Us
-        </motion.a>
+   <motion.div
+  variants={fadeInUp}
+  initial="hidden"
+  whileInView="visible"
+  viewport={{ once: true }}
+  transition={{ delay: 0.2 }}
+>
+  <Link
+    to="/contact"
+    className="bg-pink-600 text-white px-6 py-3 rounded-lg shadow hover:bg-pink-700 transition inline-block"
+  >
+    Contact Us
+  </Link>
+</motion.div>
       </section>
     </div>
   );
