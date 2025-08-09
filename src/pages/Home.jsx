@@ -71,6 +71,15 @@ const Home = () => {
         dots: true,
       },
     },
+    {
+      breakpoint: 300,
+      settings: {
+        slidesToShow: 1,
+        arrows: false,
+        dots: true,
+      },
+    },
+    
   ],
 };
 
@@ -165,26 +174,31 @@ const Home = () => {
       <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={sectionUp}>
         <CategorySection/>
       </motion.div>
-
-      {/* قسم Top Products مع Carousel */}
-      <motion.div className='max-w-full mx-auto py-12 px-4 sm:px-6 lg:px-8' initial="hidden" whileInView="show" viewport={{ once: true }} variants={sectionUp}>
-        <motion.h2 className='text-2xl font-bold mb-6 text-center'>Top Products</motion.h2>
-        <Slider {...settings}>
-          {topProducts.map((product) => (
-            <motion.div
-              key={product.id}
-              className="px-2"
-              style={{ width: '100%', boxSizing: 'border-box' }}
-              initial={{ opacity: 0, y: 14 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.35, ease: 'easeOut' }}
-            >
-              <ProductCard product={product} />
-            </motion.div>
-          ))}
-        </Slider>
+{/* قسم Top Products مع Carousel */}
+<motion.div
+  className="max-w-full mx-auto py-12 px-4 sm:px-6 lg:px-8"
+  initial="hidden"
+  whileInView="show"
+  viewport={{ once: true }}
+  variants={sectionUp}
+>
+  <motion.h2 className="text-2xl font-bold mb-6 text-center">Top Products</motion.h2>
+  <Slider {...settings}>
+    {topProducts.map((product) => (
+      <motion.div
+        key={product.id}
+        className="px-2"
+        initial={{ opacity: 0, y: 14 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.35, ease: "easeOut" }}
+      >
+        <ProductCard product={product} />
       </motion.div>
+    ))}
+  </Slider>
+</motion.div>
+
 
       <Suspense fallback={null}>
         <LazyShop/>
