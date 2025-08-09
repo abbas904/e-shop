@@ -21,30 +21,58 @@ const Home = () => {
   }, [dispatch])
 
   // إعدادات السلايدر
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 4,
-    slidesToScroll: 1,
-    arrows: true,
-    autoplay: true,
-    autoplaySpeed: 2500,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: { slidesToShow: 3 }
+ const settings = {
+  dots: true,
+  infinite: true,
+  speed: 500,
+  slidesToShow: 4,
+  slidesToScroll: 1,
+  arrows: true,
+  autoplay: true,
+  autoplaySpeed: 2500,
+  adaptiveHeight: true,
+  responsive: [
+    {
+      breakpoint: 1280,
+      settings: {
+        slidesToShow: 3,
+        arrows: true,
       },
-      {
-        breakpoint: 768,
-        settings: { slidesToShow: 2 }
+    },
+    {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 2,
+        arrows: false,
+        dots: true,
       },
-      {
-        breakpoint: 480,
-        settings: { slidesToShow: 1 }
-      }
-    ]
-  };
+    },
+    {
+      breakpoint: 768,
+      settings: {
+        slidesToShow: 2,
+        arrows: false,
+        dots: true,
+      },
+    },
+    {
+      breakpoint: 640,
+      settings: {
+        slidesToShow: 1,
+        arrows: false,
+        dots: true,
+      },
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        slidesToShow: 1,
+        arrows: false,
+        dots: true,
+      },
+    },
+  ],
+};
 
   // Framer Motion variants
   const containerFade = {
@@ -143,7 +171,15 @@ const Home = () => {
         <motion.h2 className='text-2xl font-bold mb-6 text-center'>Top Products</motion.h2>
         <Slider {...settings}>
           {topProducts.map((product) => (
-            <motion.div key={product.id} className="w-full px-2" initial={{ opacity: 0, y: 14 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.35, ease: 'easeOut' }}>
+            <motion.div
+              key={product.id}
+              className="px-2"
+              style={{ width: '100%', boxSizing: 'border-box' }}
+              initial={{ opacity: 0, y: 14 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.35, ease: 'easeOut' }}
+            >
               <ProductCard product={product} />
             </motion.div>
           ))}
