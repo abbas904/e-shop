@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import EmptyCart from '../assets/Images-main/emptyCart.png'
+import EmptyCart from '../assets/Images-main/emptycart.png'
 import { FaTrashAlt } from 'react-icons/fa'
 import Modal from '../components/Modal'
 import ChangeAdddress from '../components/ChangeAdddress'
@@ -14,7 +14,7 @@ const Cart = () => {
   const cart = useSelector((state) => state.cart)
   const [address, setAddress] = useState('ksa, jeddah street 123')
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const dispatch = useDispatch((state) => state.dispatch)
+  const dispatch = useDispatch()
   const navigate=useNavigate()
 
   return (

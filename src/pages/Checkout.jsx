@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { FaAngleDown, FaAngleUp } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { clearCart } from "../redux/cartSlice"; // عدل المسار حسب مكان ملفك
+import { clearCart } from "../redux/CartSlice";
 
 const Checkout = ({ setOrder }) => {
   const [billingToggle, setBillingToggle] = useState(true);
